@@ -122,7 +122,7 @@ def evaluate(model, validdataloader):
 if __name__ == "__main__":
 
     ckpt_path = "./checkpoint/"
-    data_path = "./tibetanData/"
+    data_path = "./data/"
     log_dir = "./log/"
     epochs = 40
 
@@ -201,6 +201,7 @@ if __name__ == "__main__":
     best_loss = None
     best_model_path = None
     bad_count = 0
+    
     for epoch in range(epoch_pre + 1, epochs):  
         fileTemp = sys.stdout
         train_loss = train(model, optimizer, dataloader, fileTemp)

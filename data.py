@@ -2,7 +2,7 @@ import pickle
 import utils.dataPreprocess as dataPreprocess
 
 if __name__ == "__main__":
-    data_path = "./tibetanData/"
+    data_path = "./data/"
     word_to_ix, ix_to_word, tag_to_ix, ix_to_tag = dataPreprocess.build_vocab_tag(data_path + 'train.txt')
     with open(data_path + 'vocab_tag.pkl', 'wb') as f:
         pickle.dump((word_to_ix, ix_to_word, tag_to_ix, ix_to_tag), file=f)
