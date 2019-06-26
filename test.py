@@ -45,7 +45,7 @@ class BiLSTM_CRF(nn.Module):
 
 if __name__ == "__main__":
 
-    ckpt_path = "./checkpoint/base_e64_h128_iter868000.cpkt"
+    ckpt_path = "./checkpoint/base_e64_h128_iter3.cpkt"
     data_path = "./data/"
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
