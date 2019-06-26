@@ -8,6 +8,7 @@ Requiements:
     tensorflow(optional, for tensorboard logging)
 
 Using:
+    
     Prepare data: train data, valid data, test data should be placed in the "data/" directory
     Process data: using data.py
     
