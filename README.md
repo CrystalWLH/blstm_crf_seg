@@ -2,6 +2,7 @@
 Chinese (Tibetan) segmentation using BLSTM + CRF
 
 Requiements:
+    
     python == 3.0
     torch >= 0.4
     pickle
