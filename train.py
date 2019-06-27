@@ -121,7 +121,7 @@ def evaluate(model, validdataloader):
 
 if __name__ == "__main__":
 
-    ckpt_path = "./checkpoint/"
+    ckpt_path = "./checkpoint/exp_batch32_lr0.001_Adam/"
     data_path = "./data/"
     log_dir = "./log/"
     epochs = 40
@@ -147,11 +147,11 @@ if __name__ == "__main__":
     opt.vocab_tag = data_path + 'vocab_tag.pkl'
     opt.embedding_dim = 64
     opt.hidden_dim = 128
-    opt.batch_size = 5
+    opt.batch_size = 32
     opt.vocab_size = len(word_to_ix)
     opt.tagset_size = len(tag_to_ix)
 
-    opt.lr = 1e-4
+    opt.lr = 1e-3
     opt.weight_decay = 1e-4
     opt.epoch = 0       # if non-zero, load checkpoint at iter (#iter_cnt)
 
@@ -187,7 +187,8 @@ if __name__ == "__main__":
             print("Failed, check the path and permission of the checkpoint")
             exit(0)
 
-    optimizer = optim.SGD(model.parameters(), lr=opt.lr, weight_decay=opt.weight_decay)
+    # optimizer = optim.SGD(model.parameters(), lr=opt.lr, weight_decay=opt.weight_decay)
+    optimizer = optim.Adam(model.parameters(), lr=opt.lr)
 
     # Check predictions before training
     with torch.no_grad():
@@ -222,6 +223,11 @@ if __name__ == "__main__":
                 print(e)
         else:
             bad_count = bad_count + 1
+            # opt.lr = opt.lr / 2.0
+            # optimizer = optim.SGD(model.parameters(), lr=opt.lr, weight_decay=opt.weight_decay)
+            print("Load the model " + best_model_path + '\t Modify the learning rate: ' + str(opt.lr))
+            sys.stdout.flush()
+            model.load_state_dict(torch.load(best_model_path))
             if bad_count == 5:
                 print("Early stopping! Valid loss has increased 5 times.")
                 sys.stdout.flush()
