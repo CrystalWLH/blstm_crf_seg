@@ -48,8 +48,9 @@ class BiLSTM(nn.Module):
         self.batch_size = self.opt.batch_size
         self.vocab_size = self.opt.vocab_size
         self.tagset_size = self.opt.tagset_size     # TO DO
+        self.layers = self.opt.layers
         self.lstm = nn.LSTM(self.embedding_dim, self.hidden_dim // 2,
-                            num_layers=1, bidirectional=True, batch_first=True)
+                            num_layers=self.layers, bidirectional=True, batch_first=True)
         # Maps the output of the LSTM into tag space.
         self.hidden2tag = nn.Linear(self.hidden_dim, self.tagset_size)
         self.hidden = self.init_hidden()
@@ -62,7 +63,8 @@ class BiLSTM(nn.Module):
     def forward(self, packed_embeds):
         # 整个模型中统一使用batch_first的顺序
         self.hidden = self.init_hidden()
-        packed_lstm_out, self.hidden = self.lstm(packed_embeds, self.hidden)
+        # packed_lstm_out, self.hidden = self.lstm(packed_embeds, self.hidden)
+        packed_lstm_out, self.hidden = self.lstm(packed_embeds)
         # 不需要记录(h_t, c_t)，因此直接覆盖
         padded_lstm_out, sent_lengths = torch.nn.utils.rnn.pad_packed_sequence(
             packed_lstm_out, batch_first=True, padding_value=0.0)
