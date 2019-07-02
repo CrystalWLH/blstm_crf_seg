@@ -3,7 +3,7 @@ Chinese (Tibetan) segmentation using BLSTM + CRF
 
 Requiements:
     
-    python == 3.0
+    python == 3.x
     torch >= 0.4
     pickle
     tensorflow(optional, for tensorboard logging)

@@ -147,7 +147,7 @@ if __name__ == "__main__":
     opt.vocab_tag = data_path + 'vocab_tag.pkl'
     opt.embedding_dim = 128
     opt.hidden_dim = 256
-    opt.layers = 2
+    opt.layers = 1
     opt.batch_size = 5
     opt.vocab_size = len(word_to_ix)
     opt.tagset_size = len(tag_to_ix)
